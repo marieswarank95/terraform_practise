@@ -60,6 +60,7 @@ resource "aws_nat_gateway" "ngw" {
   }
 }
 
+
 # Public subnet route table creation
 resource "aws_route_table" "public_subnet_rt" {
   vpc_id = aws_vpc.vpc.id
@@ -104,6 +105,7 @@ resource "aws_route" "private_subnet_route_az2" {
   destination_cidr_block = "0.0.0.0/0"
   nat_gateway_id         = aws_nat_gateway.ngw[1].id
 }
+
 
 # Public subnet route table association
 resource "aws_route_table_association" "public_subnet_rt_association" {

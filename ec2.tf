@@ -2,8 +2,8 @@
 resource "aws_instance" "web_server" {
   ami                    = data.aws_ami.ubuntu.id
   instance_type          = "t2.micro"
-  for_each               = toset(aws_subnet.public_subnet[*].id)
-  subnet_id              = each.key
+  for_each               = { one = aws_subnet.public_subnet[0].id, two = aws_subnet.public_subnet[1].id }
+  subnet_id              = each.value
   iam_instance_profile   = "EC2_SSM_Role"
   vpc_security_group_ids = [aws_security_group.web_server_sg.id]
   key_name               = "web_server"

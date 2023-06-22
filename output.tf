@@ -42,3 +42,7 @@ output "ubuntu_ami_id" {
   value = aws_instance.web_server[*].id
 }
 */
+
+output "web_server_info" {
+  value = aws_instance.web_server
+}

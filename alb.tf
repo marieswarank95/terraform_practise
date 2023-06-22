@@ -1,12 +1,12 @@
 #ALB creation
-/*resource "aws_lb" "web_lb" {
+resource "aws_lb" "web_lb" {
   name                       = "web-app-loadbalancer"
   internal                   = false
   load_balancer_type         = "application"
   ip_address_type            = "ipv4"
   subnets                    = aws_subnet.public_subnet[*].id
   security_groups            = [aws_security_group.web_server_sg.id]
-  enable_deletion_protection = true
+  enable_deletion_protection = false
   tags = {
     Name = "${var.project_name}-${var.env_name}-load_balancer"
   }
@@ -31,7 +31,7 @@ resource "aws_lb_target_group" "web_tg" {
     path                = "/"
     port                = 80
     protocol            = "HTTP"
-    timeout             = 30
+    timeout             = 5
     healthy_threshold   = 5
     unhealthy_threshold = 3
     matcher             = "200-299"
@@ -52,8 +52,8 @@ resource "aws_lb_listener" "web_lb_listener" {
 
 #Target group attachment
 resource "aws_lb_target_group_attachment" "web_tg_attachment" {
-  count            = length(aws_instance.web_server[*].id)
+  #count            = length(aws_instance.web_server[*].id)
+  for_each         = aws_instance.web_server
   target_group_arn = aws_lb_target_group.web_tg.arn
-  target_id        = element(aws_instance.web_server[*].id, count.index)
+  target_id        = each.value.id
 }
-*/
