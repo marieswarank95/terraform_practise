@@ -6,15 +6,19 @@ resource "aws_instance" "web_server" {
   subnet_id              = each.key
   iam_instance_profile   = "EC2_SSM_Role"
   vpc_security_group_ids = [aws_security_group.web_server_sg.id]
-  user_data              = <<EOF
-  apt-get update
-  apt-get install nginx -y
-  service nginx start
-  service nginx enable
-  service nginx status
-  EOF
+  key_name               = "web_server"
   tags = {
     Name = "${var.project_name}-${var.env_name}-web-server"
+  }
+  connection {
+    type        = "ssh"
+    port        = 22
+    host        = self.public_ip
+    user        = "ubuntu"
+    private_key = file("web.pem")
+  }
+  provisioner "remote-exec" {
+    inline = ["#!/bin/bash", "sudo apt-get update", "sudo apt-get install nginx -y", "sudo service nginx start", "sudo service nginx enable", "sudo service nginx status"]
   }
 }
 

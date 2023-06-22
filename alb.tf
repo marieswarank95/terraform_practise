@@ -1,5 +1,5 @@
 #ALB creation
-resource "aws_lb" "web_lb" {
+/*resource "aws_lb" "web_lb" {
   name                       = "web-app-loadbalancer"
   internal                   = false
   load_balancer_type         = "application"
@@ -56,3 +56,4 @@ resource "aws_lb_target_group_attachment" "web_tg_attachment" {
   target_group_arn = aws_lb_target_group.web_tg.arn
   target_id        = element(aws_instance.web_server[*].id, count.index)
 }
+*/

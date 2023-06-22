@@ -38,6 +38,7 @@ output "ubuntu_ami_id" {
   value = data.aws_ami.ubuntu.id
 }
 
-output "web_server_id" {
+/*output "web_server_id" {
   value = aws_instance.web_server[*].id
 }
+*/

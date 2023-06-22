@@ -3,3 +3,5 @@ terraform.tfstate.backup
 .terraform/
 terraform.tfvars
 provider.tf
+web.pem
+web.pem.pub

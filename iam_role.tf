@@ -114,6 +114,7 @@ resource "aws_iam_role_policy" "ec2_ssm_policy" {
   })
 }
 
+#instance profile creation
 resource "aws_iam_instance_profile" "ec2" {
   name = "EC2_SSM_Role"
   role = aws_iam_role.ec2_ssm.id
