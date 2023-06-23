@@ -10,7 +10,7 @@ resource "aws_instance" "web_server" {
   tags = {
     Name = "${var.project_name}-${var.env_name}-web-server"
   }
-  connection {
+  /*connection {
     type        = "ssh"
     port        = 22
     host        = self.public_ip
@@ -19,7 +19,7 @@ resource "aws_instance" "web_server" {
   }
   provisioner "remote-exec" {
     inline = ["#!/bin/bash", "sudo apt-get update", "sudo apt-get install nginx -y", "sudo service nginx start", "sudo service nginx enable", "sudo service nginx status"]
-  }
+  }*/
 }
 
 # Security group creation

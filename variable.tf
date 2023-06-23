@@ -14,3 +14,15 @@ variable "web_ingress_port" {
   description = "web server inbound ports"
   type        = list(any)
 }
+
+variable "build_project_name" {
+  description = "build project name"
+}
+
+variable "cluster_name" {
+  description = "ECS cluster name"
+}
+
+variable "service_name" {
+  description = "ECS service name"
+}
